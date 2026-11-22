@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10243a">
+<meta name="description" content="aPHRi Academy — bilingual study and practice app">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>aPHRi Academy</title>
+<style>
+:root{--navy:#10243a;--blue:#2476bd;--teal:#1ba89b;--bg:#f3f6fa;--card:#fff;--ink:#172536;--muted:#6c7b8b;--line:#e3e9ef;--good:#16845b;--bad:#c44848;--shadow:0 8px 28px #10243a12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;padding-bottom:86px}
+header{background:linear-gradient(135deg,#10243a,#17486b);color:white;padding:24px 18px 22px;border-radius:0 0 24px 24px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:800;font-size:20px;letter-spacing:.2px}.tag{font-size:11px;color:#b8d7e9;border:1px solid #ffffff35;border-radius:30px;padding:5px 9px}
+header h1{font-size:25px;margin:22px 0 5px}header p{margin:0;color:#d4e4ef;font-size:13px}
+main{max-width:760px;margin:auto;padding:16px}
+h2{font-size:18px;margin:8px 0 12px}.muted{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;box-shadow:var(--shadow);margin-bottom:12px}
+.metric{font-size:26px;font-weight:800;color:var(--navy)}.metric-label{font-size:12px;color:var(--muted)}
+.tile{cursor:pointer;text-align:right;min-height:112px;transition:.15s}.tile:active,button:active{transform:scale(.985)}.tile .ico{font-size:23px}.tile strong{display:block;margin:8px 0 3px}.tile small{color:var(--muted);font-size:12px}
+button{border:0;border-radius:12px;padding:12px 15px;font-weight:700;font-size:14px;cursor:pointer;background:var(--blue);color:#fff}
+button.secondary{background:#eaf2f8;color:var(--navy)}button.ghost{background:transparent;border:1px solid var(--line);color:var(--navy)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.full{width:100%}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.pill{display:inline-block;border-radius:30px;background:#e9f4fb;color:#1b5d91;padding:5px 9px;font-size:11px;font-weight:700}
+.progress{height:9px;background:#e9eef3;border-radius:20px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));width:0}
+nav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:transparent;color:var(--muted);padding:7px 9px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
+nav button.active{color:var(--blue);background:#edf5fb}nav b{font-size:18px}
+.section-title{font-size:18px;font-weight:800;margin:8px 0 4px}
+.en{direction:ltr;text-align:left;font-family:Arial,sans-serif;line-height:1.55}.ar{line-height:1.85}
+.term{border-right:3px solid var(--teal);padding:9px 12px;background:#f2faf9;border-radius:10px;margin:9px 0}
+.option{display:block;width:100%;text-align:right;background:#fff;color:var(--ink);border:1px solid var(--line);margin:8px 0;white-space:normal;line-height:1.5}
+.option.selected{border:2px solid var(--blue);background:#eef6fc}.option.correct{border:2px solid var(--good);background:#effaf5}.option.wrong{border:2px solid var(--bad);background:#fff4f4}
+.feedback{padding:12px;border-radius:12px;background:#f1f5f8;margin-top:12px;font-size:13px;line-height:1.7}
+.kicker{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.4px}
+ul{padding-right:20px;line-height:1.9}li{margin:3px 0}
+.hidden{display:none!important}.timer{font-weight:800;color:var(--navy);font-size:19px;font-variant-numeric:tabular-nums}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
+@media(min-width:600px){header{padding:28px max(22px,calc((100% - 720px)/2))}main{padding:22px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top"><div class="brand">aPHRi Academy</div><span class="tag">VERSION 1.0 · BETA</span></div>
+ <h1>رحلتك نحو شهادة aPHRi</h1>
+ <p>تعلّم · تدرّب · اختبر نفسك — عربي وإنجليزي</p>
+</header>
+<main>
+<section id="home" class="page">
+ <div class="row"><h2>لوحة الدراسة</h2><span class="pill">الأسبوع 1 / 4</span></div>
+ <div class="card">
+  <div class="row"><div><div class="kicker">تقدمك في التطبيق</div><div class="metric" id="overall">0%</div></div><div style="font-size:36px">🎓</div></div>
+  <div class="progress"><span id="overallbar"></span></div>
+  <p class="muted">ابدأ بالدرس الأول. سيتم حفظ تقدمك على هذا الجهاز.</p>
+ </div>
+ <div class="grid">
+  <div class="card tile" data-go="study"><div class="ico">📘</div><strong>الدراسة</strong><small>شرح الدرس 1.1</small></div>
+  <div class="card tile" data-go="practice"><div class="ico">🧠</div><strong>التدريب</strong><small>أسئلة مع التصحيح</small></div>
+  <div class="card tile" data-go="exam"><div class="ico">⏱️</div><strong>محاكاة مصغّرة</strong><small>اختبار مؤقت للدرس</small></div>
+  <div class="card tile" data-go="progress"><div class="ico">📊</div><strong>إنجازي</strong><small>نتائجك ومراجعتك</small></div>
+ </div>
+ <h2>خطة التعلم</h2>
+ <div class="card">
+  <div class="row"><strong>AREA 01 — HR Operations</strong><span class="pill">33%</span></div>
+  <p class="muted">الدرس الحالي: 1.1 Organizational Strategy</p>
+  <div class="progress"><span id="lessonbar"></span></div>
+  <p class="muted">بقية الدروس ستُضاف بالتسلسل وفق جدول HRCP وملفك الدراسي.</p>
+ </div>
+ <div class="card">
+  <strong>ملاحظة حول النسخة الأولى</strong>
+  <p class="muted">هذه نسخة تجريبية تبدأ بالدرس 1.1 فقط. الأسئلة هنا تدريبية من إعداد التطبيق، وليست أسئلة امتحان فعلية أو مسرّبة. لا تمثل بعدُ محاكاة كاملة لامتحان HRCI.</p>
+ </div>
+</section>
+
+<section id="study" class="page hidden">
+ <div class="row"><div><div class="kicker">AREA 01 · SECTION 1.1</div><h2>Organizational Strategy</h2></div><span class="pill">الدرس 1</span></div>
+ <div class="card">
+  <div class="section-title">Learning Objectives</div>
+  <p class="muted">بعد دراسة هذا الجزء، ينبغي أن تكون قادراً على:</p>
+  <ul><li>Define organizational strategy.</li><li>Explain the relationship between mission, vision, values, business goals, and objectives.</li><li>Describe how Human Resources supports organizational strategy.</li><li>Recognize the importance of strategic alignment between HR and business operations.</li></ul>
+ </div>
+ <div class="card">
+  <div class="section-title">1. What is Organizational Strategy?</div>
+  <p class="en"><b>An Organizational Strategy</b> is a comprehensive long-term plan that defines how an organization will achieve its mission, realize its vision, accomplish its business goals, and sustain a competitive advantage.</p>
+  <p class="ar">الاستراتيجية التنظيمية هي خطة شاملة طويلة الأجل تحدد كيفية تحقيق المنظمة لرسالتها، والوصول إلى رؤيتها، وتحقيق أهدافها، والمحافظة على ميزتها التنافسية.</p>
+  <div class="term"><b>الفكرة الأساسية:</b> أين تريد المنظمة أن تصل؟ وكيف ستصل؟ وما الموارد التي تحتاجها؟</div>
+ </div>
+ <div class="card">
+  <div class="section-title">2. The Five Strategic Elements</div>
+  <div class="term"><b>Mission — الرسالة</b><p class="en">Defines the organization's fundamental purpose and reason for existence.</p><p class="ar">توضح سبب وجود المنظمة وماذا تقدم ولمن تقدم خدماتها. <b>تركز على الحاضر.</b></p></div>
+  <div class="term"><b>Vision — الرؤية</b><p class="en">Describes the organization's desired future.</p><p class="ar">توضح ما تطمح المنظمة إلى أن تصبح عليه مستقبلاً. <b>تركز على المستقبل.</b></p></div>
+  <div class="term"><b>Values — القيم</b><p class="en">Core beliefs and ethical principles that guide employee behavior and management decisions.</p><p class="ar">المبادئ والمعتقدات التي توجه سلوك الموظفين وقرارات الإدارة، مثل النزاهة والاحترام والعمل الجماعي.</p></div>
+  <div class="term"><b>Business Goals — الأهداف العامة</b><p class="en">Broad, long-term outcomes that an organization intends to achieve.</p><p class="ar">نتائج عامة وطويلة المدى تسعى المنظمة لتحقيقها، مثل زيادة الحصة السوقية أو الربحية.</p></div>
+  <div class="term"><b>Objectives — الأهداف التنفيذية</b><p class="en">Specific, measurable actions that support the achievement of business goals.</p><p class="ar">أهداف محددة وقابلة للقياس تساعد على تحقيق الأهداف العامة.</p></div>
+ </div>
+ <div class="card">
+  <div class="section-title">3. SMART Objectives</div>
+  <ul><li><b>S — Specific:</b> محدد</li><li><b>M — Measurable:</b> قابل للقياس</li><li><b>A — Achievable:</b> قابل للتحقيق</li><li><b>R — Relevant:</b> ذو صلة</li><li><b>T — Time-bound:</b> محدد بزمن</li></ul>
+  <p class="en">Example: Reduce employee turnover from 18% to 10% within 12 months.</p>
+  <p class="ar">مثال: خفض معدل دوران الموظفين من 18% إلى 10% خلال 12 شهراً.</p>
+ </div>
+ <div class="card">
+  <div class="section-title">4. HR's Strategic Role</div>
+  <p class="en">Human Resources translates organizational strategy into workforce strategies by ensuring the organization has the right people, with the right competencies, in the right positions, at the right time.</p>
+  <p class="ar">تحوّل الموارد البشرية الاستراتيجية التنظيمية إلى خطط للقوى العاملة، من خلال توفير الأشخاص المناسبين بالمهارات المناسبة وفي الوظائف المناسبة والوقت المناسب.</p>
+  <ul><li>Workforce Planning — تخطيط القوى العاملة</li><li>Talent Acquisition — استقطاب المواهب</li><li>Employee Development — تطوير الموظفين</li><li>Performance Management — إدارة الأداء</li><li>Succession Planning — التخطيط للتعاقب الوظيفي</li><li>Employee Retention — المحافظة على الموظفين</li></ul>
+ </div>
+ <div class="card">
+  <div class="section-title">5. Strategic Alignment</div>
+  <p class="en">Strategic Alignment ensures that organizational activities, resources, and employees work toward the same strategic direction.</p>
+  <p class="ar">المواءمة الاستراتيجية تعني أن تعمل أنشطة المنظمة ومواردها وموظفوها في الاتجاه نفسه لتحقيق الاستراتيجية العامة.</p>
+ </div>
+ <button class="full" id="markDone">إكمال الدرس وتسجيله</button>
+ <p class="muted">المصدر الدراسي: ملف AREA 01 المرفوع — Section 1.1. تم الحفاظ على المصطلحات والمعاني الأساسية الواردة فيه.</p>
+</section>
+
+<section id="practice" class="page hidden">
+ <div class="kicker">PRACTICE MODE</div><h2>تدريب الدرس 1.1</h2>
+ <p class="muted">أجب عن الأسئلة ثم اعرض التصحيح والتفسير.</p>
+ <div id="practiceMount"></div>
+</section>
+
+<section id="exam" class="page hidden">
+ <div class="kicker">MINI EXAM SIMULATION</div><h2>محاكاة مصغّرة</h2>
+ <div class="card">
+  <div class="row"><strong>4 أسئلة · 8 دقائق</strong><span class="timer" id="timer">08:00</span></div>
+  <p class="muted">هذه محاكاة تدريبية قصيرة للدرس 1.1 فقط، وليست الامتحان الرسمي الكامل.</p>
+  <button id="startExam" class="full">بدء المحاكاة</button>
+ </div>
+ <div id="examMount"></div>
+</section>
+
+<section id="progress" class="page hidden">
+ <h2>إنجازي ونتائجي</h2>
+ <div class="grid">
+  <div class="card"><div class="metric" id="doneCount">0</div><div class="metric-label">دروس مكتملة</div></div>
+  <div class="card"><div class="metric" id="attemptCount">0</div><div class="metric-label">محاولات تدريب</div></div>
+ </div>
+ <div class="card"><strong>أفضل نتيجة تدريب</strong><div class="metric" id="bestScore">—</div><p class="muted">يتم حفظ النتائج على هذا الجهاز فقط.</p></div>
+ <div class="card"><strong>نقاط للمراجعة</strong><p class="muted" id="reviewText">أكمل التدريب حتى تظهر لك الموضوعات التي تحتاج إلى مراجعة.</p></div>
+ <button class="ghost full" id="resetData">إعادة ضبط التقدم على هذا الجهاز</button>
+</section>
+</main>
+<nav>
+ <button class="active" data-nav="home"><b>⌂</b>الرئيسية</button>
+ <button data-nav="study"><b>▤</b>الدراسة</button>
+ <button data-nav="practice"><b>✓</b>التدريب</button>
+ <button data-nav="exam"><b>◷</b>المحاكاة</button>
+ <button data-nav="progress"><b>▥</b>إنجازي</button>
+</nav>
+<footer>aPHRi Academy · Independent study companion · Not affiliated with HRCI</footer>
+<script>
+const questions=[
+ {q:"Which statement best describes an organization's mission?",o:["It describes the organization's desired future.","It explains why the organization exists.","It measures employee performance.","It defines the organization's annual budget."],a:1,e:"Mission explains the organization's fundamental purpose and reason for existence.",topic:"Mission"},
+ {q:"A company wants to become the leading healthcare provider in its region within five years. This statement represents its:",o:["Mission","Values","Vision","Daily objective"],a:2,e:"Vision describes the desired future state of the organization.",topic:"Vision"},
+ {q:"Which is the best example of a SMART objective?",o:["Improve employee satisfaction.","Become a better employer.","Reduce employee turnover from 18% to 10% within 12 months.","Encourage employees to work harder."],a:2,e:"It is specific, measurable, achievable, relevant, and time-bound.",topic:"SMART"},
+ {q:"HR recruits qualified employees and trains existing staff to support a planned expansion. This is an example of:",o:["Strategic Alignment","Organizational conflict","Employee discipline","Job evaluation"],a:0,e:"HR aligns workforce activities with the organization's business strategy.",topic:"Strategic Alignment"}
+];
+const state=()=>JSON.parse(localStorage.getItem("aphri_v1")||'{"done":[],"attempts":0,"best":0,"wrong":[]}');
+function save(s){localStorage.setItem("aphri_v1",JSON.stringify(s));renderProgress()}
+function show(id){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("hidden",x.id!==id));document.querySelectorAll("[data-nav]").forEach(x=>x.classList.toggle("active",x.dataset.nav===id));window.scrollTo(0,0);if(id==="progress")renderProgress()}
+document.querySelectorAll("[data-go],[data-nav]").forEach(x=>x.addEventListener("click",()=>show(x.dataset.go||x.dataset.nav)));
+function renderProgress(){let s=state();document.getElementById("overall").textContent=s.done.includes("1.1")?"25%":"0%";document.getElementById("overallbar").style.width=s.done.includes("1.1")?"25%":"0%";document.getElementById("lessonbar").style.width=s.done.includes("1.1")?"100%":"0%";document.getElementById("doneCount").textContent=s.done.length;document.getElementById("attemptCount").textContent=s.attempts;document.getElementById("bestScore").textContent=s.attempts?s.best+" / 4":"—";document.getElementById("reviewText").textContent=s.wrong.length?"راجع: "+[...new Set(s.wrong)].join("، "):"أكمل التدريب حتى تظهر لك الموضوعات التي تحتاج إلى مراجعة."}
+document.getElementById("markDone").onclick=()=>{let s=state();if(!s.done.includes("1.1"))s.done.push("1.1");save(s);document.getElementById("markDone").textContent="تم تسجيل إكمال الدرس ✓";};
+function renderQuiz(mount,mode){let idx=0,answers={},submitted=false;const host=document.getElementById(mount);function draw(){let q=questions[idx];host.innerHTML=`<div class="card"><div class="row"><span class="pill">السؤال ${idx+1} من 4</span><span class="muted">${mode==="exam"?"محاكاة":"تدريب"}</span></div><h3 class="en">${q.q}</h3><div id="opts"></div><div id="fb"></div><div class="row" style="margin-top:12px"><button class="secondary" id="prev" ${idx===0?"disabled":""}>السابق</button><button id="next">${idx===3?(mode==="exam"?"إنهاء المحاكاة":"إنهاء التدريب"):"التالي"}</button></div></div>`;let opts=host.querySelector("#opts");q.o.forEach((o,j)=>{let b=document.createElement("button");b.className="option"+(answers[idx]===j?" selected":"");b.textContent=String.fromCharCode(65+j)+". "+o;b.onclick=()=>{if(submitted)return;answers[idx]=j;draw()};opts.appendChild(b)});host.querySelector("#prev").onclick=()=>{idx--;draw()};host.querySelector("#next").onclick=()=>{if(answers[idx]===undefined){alert("اختر إجابة أولاً.");return}if(idx<3){idx++;draw()}else finish()}}
+function finish(){submitted=true;let score=questions.filter((q,i)=>answers[i]===q.a).length;let s=state();s.attempts++;s.best=Math.max(s.best,score);questions.forEach((q,i)=>{if(answers[i]!==q.a&&!s.wrong.includes(q.topic))s.wrong.push(q.topic)});save(s);host.innerHTML=`<div class="card"><div class="metric">${score} / 4</div><h3>انتهى ${mode==="exam"?"الاختبار":"التدريب"}</h3><p>${score===4?"ممتاز!":score>=2?"أداء جيد، راجع الأخطاء.":"نحتاج إلى مراجعة الدرس مرة أخرى."}</p>${questions.map((q,i)=>`<div class="feedback"><b>Q${i+1}. ${q.q}</b><br>${answers[i]===q.a?"✓ صحيح":"✗ إجابتك: "+(q.o[answers[i]]||"—")+"<br>الإجابة الصحيحة: "+q.o[q.a]}<br><span class="muted">${q.e}</span></div>`).join("")}<button class="full" style="margin-top:14px" onclick="show('progress')">عرض تقدمي</button></div>`}
+draw()}
+renderQuiz("practiceMount","practice");
+let examInterval=null,remaining=480;
+function tick(){remaining--;document.getElementById("timer").textContent=String(Math.floor(remaining/60)).padStart(2,"0")+":"+String(remaining%60).padStart(2,"0");if(remaining<=0){clearInterval(examInterval);alert("انتهى الوقت. أعد بدء المحاكاة للتدرب مرة أخرى.")}}
+document.getElementById("startExam").onclick=()=>{clearInterval(examInterval);remaining=480;document.getElementById("timer").textContent="08:00";document.getElementById("startExam").classList.add("hidden");renderQuiz("examMount","exam");examInterval=setInterval(tick,1000)};
+document.getElementById("resetData").onclick=()=>{if(confirm("هل تريد حذف تقدمك ونتائجك المحفوظة على هذا الجهاز؟")){localStorage.removeItem("aphri_v1");renderProgress();document.getElementById("markDone").textContent="إكمال الدرس وتسجيله"}};
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+renderProgress();
+</script>
+</body></html>
